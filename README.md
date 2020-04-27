@@ -73,10 +73,11 @@ that, you may follow the remaining steps below just the way they are.
        AUTH_USER_MODEL = "emailuser.User"
 
 
-4. Run migrations.
+4. Run migrations (Don't do any migrate before `emailuser` makemigrations).
 
    .. code-block:: shell
 
+       python manage.py makemigrations emailuser
        python manage.py migrate
 
 5. FOO@example.com will be replaced to foo@example.com automatically
@@ -118,5 +119,5 @@ Questions, comments, or anything else?
 --------------------------------------
 
 -  Open an issue
--  `Linkedin <https://www.linkedin.com/in/swe-himelrana>`__
+-  https://www.linkedin.com/in/swe-himelrana
 -  contact@himelrana-swe.com
