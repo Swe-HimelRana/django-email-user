@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.utils.translation import gettext as _
 
 # Create your models here.
 
@@ -38,8 +37,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """ Custom user model that support email instent of username """
-    email = models.EmailField(max_length=255, unique=True, error_messages={
-                              'unique': _("A user with that email address already exists."), },)
+    email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
