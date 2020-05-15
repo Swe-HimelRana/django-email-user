@@ -15,7 +15,8 @@ class AdminSiteTests(TestCase):
         self.user = get_user_model().objects.create_user(
             email='testuser@himelrana-swe.com',
             password='testpassword',
-            name='Himel Rana'
+            first_name='Himel',
+            last_name='Rana'
         )
 
     def test_users_listed(self):
@@ -23,7 +24,8 @@ class AdminSiteTests(TestCase):
         url = reverse('admin:emailuser_user_changelist')
         res = self.client.get(url)
 
-        self.assertContains(res, self.user.name)
+        self.assertContains(res, self.user.first_name)
+        self.assertContains(res, self.user.last_name)
         self.assertContains(res, self.user.email)
 
     def test_user_change_page(self):

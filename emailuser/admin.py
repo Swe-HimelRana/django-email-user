@@ -6,11 +6,12 @@ from emailuser import models
 
 
 class UserAdmin(BaseUserAdmin):
-    ordering = ['id']
-    list_display = ['email', 'username', 'name', 'is_staff']
+    ordering = ['email']
+    search_fields = ('email', 'first_name', 'last_name', 'joined_date')
+    list_display = ['email', 'username', 'first_name', 'last_name', 'is_staff']
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}),
-        (_('Personal Info'), {'fields': ('name',)}),
+        (_('Personal Info'), {'fields': ('first_name', 'last_name',)}),
         (
             _('Permissions'),
             {
@@ -23,13 +24,13 @@ class UserAdmin(BaseUserAdmin):
                 )
             }
         ),
-        (_('Important dates'), {'fields': ('last_login',)}),
+        (_('Important dates'), {'fields': ('last_login', 'joined_date')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'name', 'password1', 'password2')
+            'fields': ('email', 'username', 'first_name', 'last_name', 'password1', 'password2')
         }),
     )
 
