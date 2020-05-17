@@ -1,7 +1,7 @@
 
 # # `emailuser` is a Django Custom User Module
 
-#Package Version: 1.0.0
+#Package Version: 1.x
 `emailuser` makes it easy to use email address as your identification token instead of a username.
 emailuser is a custom Django user model (extends  `AbstractBaseUser`) so it takes a tiny amount of effort to use.
 
