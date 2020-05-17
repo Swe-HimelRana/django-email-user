@@ -1,8 +1,7 @@
+
 # # `emailuser` is a Django Custom User Module
 
-#Package Version: 2.x
-( For Package version 1.x see documentation [here](github.com/Swe-HimelRana/django-email-user/blob/master/README-v1.md) )
-
+#Package Version: 1.0.0
 `emailuser` makes it easy to use email address as your identification token instead of a username.
 emailuser is a custom Django user model (extends  `AbstractBaseUser`) so it takes a tiny amount of effort to use.
 
@@ -48,8 +47,8 @@ If you love it you can [donate](https://commerce.coinbase.com/checkout/c3eafb3c-
    if you have tables referencing Django  `User`  model, you will have to delete those table and migrations, then re-migrate. This will ensure everything is set up correctly from the beginning.
   
    ```
-	  python manage.py makemigrations emailuser
-	  python manage.py migrate
+    python manage.py makemigrations emailuser
+    python manage.py migrate
   ```
 
  6. Instead of referring to User directly, you should reference the user model using  `django.contrib.auth.get_user_model()`
@@ -70,16 +69,33 @@ If you love it you can [donate](https://commerce.coinbase.com/checkout/c3eafb3c-
 
     from django.contrib.auth import get_user_model
     class  UserSerializer(serializers.ModelSerializer):
-    	class  Meta:
-    		model = get_user_model()
-    		fields = ('id', 'email', 'username', 'first_name', 'last_name')
+      class  Meta:
+        model = get_user_model()
+        fields = ('id', 'email', 'username', 'first_name', 'last_name')
+
  8: Helper Functions
-	
+  
 
     from django.contrib.auth import get_user_model
     
-    get_user_model().objects.get_full_name() 	# Return Full Name
-    get_user_model().objects.send_email(subject, message, from_email) 	#this willl send email to current user
+    get_user_model().objects.get_full_name()  # Return Full Name
+    
+    /*
+    For sending email you must configure smtp setting like below
+      EMAIL_HOST = 'hostname'
+    EMAIL_PORT = port
+    EMAIL_HOST_USER = 'username'
+    EMAIL_HOST_PASSWORD = 'password'
+    EMAIL_USE_TLS = True
+  */
+  
+    get_user_model().objects.send_email(subject, message, from_email)   
+  
+  # this will send email to logged in user
+  # by default it will not show sending error 
+  # for showing error extra False argument required like below
+  
+  get_user_model().objects.send_email(subject, message, from_email, False)  
 
 9: Registraion
 

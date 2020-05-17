@@ -8,7 +8,7 @@ class ModelTests(TestCase):
 
     def test_create_user_with_email_successful(self):
         """ Test creating a new user with an email is successful"""
-        email = 'test@himelrana-swe.com'
+        email = 'himelranaswe@gmail.com'
         password = 'Testpass123'
         username = 'himeluser'
         user = get_user_model().objects.create_user(
@@ -25,6 +25,9 @@ class ModelTests(TestCase):
         print('FullName is ', user.get_full_name())
         print('Username is: ', user.get_username())
         self.assertTrue(user.check_password(password))
+
+        user.send_email('Sending from Django', 'This is an email from django',
+                        'Dont Reply <localh28@gmail.com>', False)
 
     def test_new_user_email_normalized(self):
         """ Test the email for a new user is normalized """

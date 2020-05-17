@@ -7,11 +7,13 @@ from emailuser import models
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['email']
-    search_fields = ('email', 'first_name', 'last_name', 'joined_date')
+    search_fields = ('email', 'first_name', 'last_name', 'username',
+                     'joined_date')
     list_display = ['email', 'username', 'first_name', 'last_name', 'is_staff']
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'password')}),
-        (_('Personal Info'), {'fields': ('first_name', 'last_name',)}),
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal Info'), {
+         'fields': ('first_name', 'last_name', 'username')}),
         (
             _('Permissions'),
             {
@@ -30,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'first_name', 'last_name', 'password1', 'password2')
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2', 'username')
         }),
     )
 
